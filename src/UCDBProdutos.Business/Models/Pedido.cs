@@ -2,14 +2,8 @@
 
 namespace UCDBProdutos.Business.Models
 {
-    public class Pedido
+    public class Pedido : Entity
     {
-        public Pedido()
-        {
-            Id = Guid.NewGuid();
-        }
-        public Guid Id { get; set; }
-
         public string NomeProduto { get; set; }
 
         public decimal Valor { get; set; }
