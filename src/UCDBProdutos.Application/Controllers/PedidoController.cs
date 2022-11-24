@@ -87,5 +87,13 @@ namespace UCDBProdutos.Application.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Remover(Guid id)
+        {
+            await _pedidoRepository.Remover(id);
+
+            return RedirectToAction("Index");
+        }
     }
 }
