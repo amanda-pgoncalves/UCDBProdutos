@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UCDBProdutos.Application.Models;
@@ -51,6 +52,38 @@ namespace UCDBProdutos.Application.Controllers
             };
 
             await _pedidoRepository.Adicionar(pedidoBusiness);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Atualizar(Guid id)
+        {
+            var pedidoBusiness = await _pedidoRepository.ObterPorId(id);
+
+            Pedido pedido = new Pedido
+            {
+                Id = pedidoBusiness.Id,
+                DataVencimento = pedidoBusiness.DataVencimento,
+                NomeProduto = pedidoBusiness.NomeProduto,
+                Valor = pedidoBusiness.Valor
+            };
+
+            return View(pedido);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Atualizar(Pedido pedido)
+        {
+            UCDBProdutos.Business.Models.Pedido pedidoBusiness = new Business.Models.Pedido
+            {
+                Id = pedido.Id,
+                NomeProduto = pedido.NomeProduto,
+                Valor = pedido.Valor,
+                DataVencimento = pedido.DataVencimento
+            };
+
+            await _pedidoRepository.Atualizar(pedidoBusiness);
 
             return RedirectToAction("Index");
         }
