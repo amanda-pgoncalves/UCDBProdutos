@@ -34,9 +34,25 @@ namespace UCDBProdutos.Application.Controllers
         }
 
         [HttpGet]
-        public IActionResult CadastrarPedidos()
+        public IActionResult Cadastrar()
         {
             return View(new Pedido());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Cadastrar(Pedido pedido)
+        {
+            UCDBProdutos.Business.Models.Pedido pedidoBusiness = new Business.Models.Pedido
+            {
+                Id = pedido.Id,
+                NomeProduto = pedido.NomeProduto,
+                Valor = pedido.Valor,
+                DataVencimento = pedido.DataVencimento
+            };
+
+            await _pedidoRepository.Adicionar(pedidoBusiness);
+
+            return RedirectToAction("Index");
         }
     }
 }
