@@ -9,7 +9,7 @@ namespace UCDBProdutos.Business.Interfaces
         Task Adicionar(Pedido pedido);
 
         Task Atualizar(Pedido pedido);
-        
+                
         Task Remover(Guid id);
     }
 }

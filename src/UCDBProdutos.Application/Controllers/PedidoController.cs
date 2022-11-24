@@ -1,12 +1,42 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using UCDBProdutos.Application.Models;
+using UCDBProdutos.Business.Interfaces;
 
 namespace UCDBProdutos.Application.Controllers
 {
     public class PedidoController : Controller
     {
-        public IActionResult Index()
+        private readonly IPedidoRepository _pedidoRepository;
+
+        public PedidoController(IPedidoRepository pedidoRepository)
         {
-            return View();
+            _pedidoRepository = pedidoRepository;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var pedidosBusiness = await _pedidoRepository.ObterTodos();
+
+            List<Pedido> pedidos = new List<Pedido>();
+
+            foreach (var pedidoBusiness in pedidosBusiness)
+            {
+                Pedido pedido = new Pedido { Id = pedidoBusiness.Id , 
+                                            DataVencimento = pedidoBusiness.DataVencimento,
+                                            NomeProduto = pedidoBusiness.NomeProduto, 
+                                            Valor = pedidoBusiness.Valor};
+                pedidos.Add(pedido);
+            }
+             
+            return View(pedidos);
+        }
+
+        [HttpGet]
+        public IActionResult CadastrarPedidos()
+        {
+            return View(new Pedido());
         }
     }
 }
