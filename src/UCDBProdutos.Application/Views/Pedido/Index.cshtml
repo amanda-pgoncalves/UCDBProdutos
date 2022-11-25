@@ -28,6 +28,12 @@
             <td>
                 <a href="/pedido/atualizar/@pedido.Id" class="btn">Atualizar</a>
                 <a href="/pedido/remover/@pedido.Id" class="btn">Excluir</a>
+                    @{
+                        if (@pedido.Desconto)
+                        {
+                            <a href="/pedido/desconto/@pedido.Id" class="btn">Desconto</a>
+                        }
+                    }
             </td>
         </tr>
     }       

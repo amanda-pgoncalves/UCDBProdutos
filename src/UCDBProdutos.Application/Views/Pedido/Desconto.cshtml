@@ -1,0 +1,18 @@
+﻿@model UCDBProdutos.Application.Models.Pedido
+@{
+    ViewBag.Title = "Pedido - Desconto";
+}
+    <h1>Deseja aplicar 10% de desconto ao @Model.NomeProduto?</h1>
+      <form method="post">
+        
+        <input type="hidden" name="NomeProduto" value="@Model.NomeProduto" class="form-control" id="NomeProduto" placeholder="Digite o nome do produto">
+        
+        <input type="hidden" name="Valor" value="@Model.Valor" class="form-control" id="Valor" placeholder="Digite o valor do produto">
+      
+        <input type="hidden" name="DataVencimento" value="@Model.DataVencimento" class="form-control" id="DataVencimento" placeholder="Digite da data de vencimento do produto">
+   
+        <button type="submit" class="btn btn-primary">Aplicar Desconto</button>
+
+      </form>
+
+

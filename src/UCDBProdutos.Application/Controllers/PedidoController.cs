@@ -118,5 +118,37 @@ namespace UCDBProdutos.Application.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Desconto(Guid id)
+        {
+            var pedidoBusiness = await _pedidoRepository.ObterPorId(id);
+
+            Pedido pedido = new Pedido
+            {
+                Id = pedidoBusiness.Id,
+                DataVencimento = pedidoBusiness.DataVencimento,
+                NomeProduto = pedidoBusiness.NomeProduto,
+                Valor = pedidoBusiness.Valor
+            };
+
+            return View(pedido);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Desconto(Pedido pedido)
+        {
+            UCDBProdutos.Business.Models.Pedido pedidoBusiness = new Business.Models.Pedido
+            {
+                Id = pedido.Id,
+                NomeProduto = pedido.NomeProduto,
+                Valor = pedido.Valor - (pedido.Valor * 0.1m),
+                DataVencimento = pedido.DataVencimento
+            };
+
+            await _pedidoRepository.Atualizar(pedidoBusiness);
+
+            return RedirectToAction("Index");
+        }
     }
 }
