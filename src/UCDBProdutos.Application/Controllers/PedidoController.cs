@@ -9,16 +9,16 @@ namespace UCDBProdutos.Application.Controllers
 {
     public class PedidoController : Controller
     {
-        private readonly IPedidoRepository _pedidoRepository;
+        private readonly IPedidoService _pedidoService;
 
-        public PedidoController(IPedidoRepository pedidoRepository)
+        public PedidoController(IPedidoService pedidoService)
         {
-            _pedidoRepository = pedidoRepository;
+            _pedidoService = pedidoService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var pedidosBusiness = await _pedidoRepository.ObterTodos();
+            var pedidosBusiness = await _pedidoService.ObterTodos();
 
             List<Pedido> pedidos = new List<Pedido>();
 
@@ -66,7 +66,7 @@ namespace UCDBProdutos.Application.Controllers
         [HttpPost]
         public async Task<IActionResult> Cadastrar(Pedido pedido)
         {
-            UCDBProdutos.Business.Models.Pedido pedidoBusiness = new Business.Models.Pedido
+            var pedidoBusiness = new Business.Models.Pedido
             {
                 Id = pedido.Id,
                 NomeProduto = pedido.NomeProduto,
@@ -74,7 +74,7 @@ namespace UCDBProdutos.Application.Controllers
                 DataVencimento = pedido.DataVencimento
             };
 
-            await _pedidoRepository.Adicionar(pedidoBusiness);
+            await _pedidoService.Adicionar(pedidoBusiness);
 
             return RedirectToAction("Index");
         }
@@ -82,7 +82,7 @@ namespace UCDBProdutos.Application.Controllers
         [HttpGet]
         public async Task<IActionResult> Atualizar(Guid id)
         {
-            var pedidoBusiness = await _pedidoRepository.ObterPorId(id);
+            var pedidoBusiness = await _pedidoService.ObterPorId(id);
 
             Pedido pedido = new Pedido
             {
@@ -98,7 +98,7 @@ namespace UCDBProdutos.Application.Controllers
         [HttpPost]
         public async Task<IActionResult> Atualizar(Pedido pedido)
         {
-            UCDBProdutos.Business.Models.Pedido pedidoBusiness = new Business.Models.Pedido
+            var pedidoBusiness = new Business.Models.Pedido
             {
                 Id = pedido.Id,
                 NomeProduto = pedido.NomeProduto,
@@ -106,7 +106,7 @@ namespace UCDBProdutos.Application.Controllers
                 DataVencimento = pedido.DataVencimento
             };
 
-            await _pedidoRepository.Atualizar(pedidoBusiness);
+            await _pedidoService.Atualizar(pedidoBusiness);
 
             return RedirectToAction("Index");
         }
@@ -114,7 +114,7 @@ namespace UCDBProdutos.Application.Controllers
         [HttpGet]
         public async Task<IActionResult> Remover(Guid id)
         {
-            await _pedidoRepository.Remover(id);
+            await _pedidoService.Remover(id);
 
             return RedirectToAction("Index");
         }
@@ -122,7 +122,7 @@ namespace UCDBProdutos.Application.Controllers
         [HttpGet]
         public async Task<IActionResult> Desconto(Guid id)
         {
-            var pedidoBusiness = await _pedidoRepository.ObterPorId(id);
+            var pedidoBusiness = await _pedidoService.ObterPorId(id);
 
             Pedido pedido = new Pedido
             {
@@ -138,7 +138,7 @@ namespace UCDBProdutos.Application.Controllers
         [HttpPost]
         public async Task<IActionResult> Desconto(Pedido pedido)
         {
-            UCDBProdutos.Business.Models.Pedido pedidoBusiness = new Business.Models.Pedido
+            var pedidoBusiness = new Business.Models.Pedido
             {
                 Id = pedido.Id,
                 NomeProduto = pedido.NomeProduto,
@@ -146,7 +146,7 @@ namespace UCDBProdutos.Application.Controllers
                 DataVencimento = pedido.DataVencimento
             };
 
-            await _pedidoRepository.Atualizar(pedidoBusiness);
+            await _pedidoService.Atualizar(pedidoBusiness);
 
             return RedirectToAction("Index");
         }

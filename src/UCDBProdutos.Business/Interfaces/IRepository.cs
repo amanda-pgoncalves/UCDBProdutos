@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 using UCDBProdutos.Business.Models;
 
@@ -17,9 +16,5 @@ namespace UCDBProdutos.Business.Interfaces
         Task Atualizar(TEntity entity);
 
         Task Remover(Guid id);
-
-        Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate);
-
-        Task<int> SaveChanges();
     }
 }

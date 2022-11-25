@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using UCDBProdutos.Business.Interfaces;
+using UCDBProdutos.Business.Services;
 using UCDBProdutos.Data.Context;
 using UCDBProdutos.Data.Repository;
 
@@ -29,6 +30,7 @@ namespace UCDBProdutos.Application
 
             services.AddScoped<MyDbContext>();
             services.AddScoped<IPedidoRepository, PedidoRepository>();
+            services.AddScoped<IPedidoService, PedidoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
