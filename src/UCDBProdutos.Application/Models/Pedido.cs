@@ -11,5 +11,9 @@ namespace UCDBProdutos.Application.Models
         public decimal Valor { get; set; }
 
         public DateTime DataVencimento { get; set; }
+
+        public string Cor { get; set; }
+
+        public bool Desconto { get; set; }
     }
 }

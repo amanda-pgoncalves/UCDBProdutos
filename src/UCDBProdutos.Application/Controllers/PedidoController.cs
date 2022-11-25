@@ -28,6 +28,29 @@ namespace UCDBProdutos.Application.Controllers
                                             DataVencimento = pedidoBusiness.DataVencimento,
                                             NomeProduto = pedidoBusiness.NomeProduto, 
                                             Valor = pedidoBusiness.Valor};
+
+                var dataVencimento = DateTime.Parse(pedidoBusiness.DataVencimento.ToShortDateString());
+
+                var dataAtual = DateTime.Parse(DateTime.Now.ToShortDateString());
+
+                if (dataVencimento == dataAtual || dataVencimento.AddDays(-1) == dataAtual || dataVencimento.AddDays(-2) == dataAtual)
+                {
+                    pedido.Cor = "gold";
+                    pedido.Desconto = true;
+                }
+
+                else if (dataAtual < dataVencimento)
+                {
+                    pedido.Cor = "ForestGreen";
+                    pedido.Desconto = true;
+                }
+
+                else
+                {
+                    pedido.Cor = "red";
+                    pedido.Desconto = false;
+                }
+
                 pedidos.Add(pedido);
             }
              

@@ -9,5 +9,6 @@ namespace UCDBProdutos.Business.Models
         public decimal Valor { get; set; }
 
         public DateTime DataVencimento { get; set; }
+        
     }
 }
