@@ -5,11 +5,11 @@
 
       <form method="post">
         <label for="nome">Nome</label>
-        <input type="text" name="NomeProduto" value="@Model.NomeProduto" class="form-control" id="NomeProduto" placeholder="Digite o nome do produto">
+        <input type="text" name="NomeProduto" value="@Model.NomeProduto" class="form-control" id="NomeProduto" placeholder="Digite o nome do produto" required>
         <label for="nome">Valor</label>
-        <input type="text" name="Valor" value="@Model.Valor" class="form-control" id="Valor" placeholder="Digite o valor do produto">
+        <input type="text" name="Valor" value="@Model.Valor" class="form-control" id="Valor" placeholder="Digite o valor do produto" required>
         <label for="nome">Data Vencimento</label>
-        <input type="text" name="DataVencimento" value="@Model.DataVencimento" class="form-control" id="DataVencimento" placeholder="Digite da data de vencimento do produto">
+        <input type="text" name="DataVencimento" value="@Model.DataVencimento" class="form-control" id="DataVencimento" placeholder="Digite da data de vencimento do produto" required>
    
         <button type="submit" class="btn btn-primary">Salvar</button>
 
